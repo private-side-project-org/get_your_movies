@@ -12,6 +12,7 @@ module.exports = () => {
       path: path.resolve(__dirname, "/public"),
       filename: "build.js",
     },
+    devtool: "inline-source-map",
     module: {
       rules: [
         {
