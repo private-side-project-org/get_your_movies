@@ -4,11 +4,13 @@ import PropTypes from "prop-types";
 const propTypes = {
   movie: PropTypes.shape({
     id: PropTypes.number,
+    original_title: PropTypes.string,
+    overview: PropTypes.string,
+    backdrop_path: PropTypes.string,
   }).isRequired,
 };
 
 const MoviesListItem = ({ movie }) => {
-  console.log("moie", movie);
   const { original_title, overview, backdrop_path } = movie;
   const imageBaseUrl = "https://image.tmdb.org/t/p/";
   const imageSize = "w300";
