@@ -1,0 +1,14 @@
+.moviePanel-container {
+  display: flex;
+  padding: 16px;
+  position: relative;
+
+  .moviePanel-image-container {
+    object-fit: none;
+  }
+
+  .moviePanel-detail-container {
+    display: flex;
+    flex-direction: column;
+  }
+}

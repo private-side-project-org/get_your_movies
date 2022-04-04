@@ -12,7 +12,11 @@ const fetchMovieById = ({ queryKey }) => {
 };
 
 export default (id) => {
-  const { data: movie } = useQuery(["movie", id], fetchMovieById, {
+  const {
+    data: movie,
+    isLoading,
+    isFetching,
+  } = useQuery(["movie", id], fetchMovieById, {
     onSuccess: () => {
       console.log("success");
     },
@@ -24,5 +28,7 @@ export default (id) => {
 
   return {
     movie,
+    isLoading,
+    isFetching,
   };
 };
