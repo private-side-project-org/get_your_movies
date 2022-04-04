@@ -25,6 +25,10 @@ module.exports = () => {
           // right to left: 1.compile sass -> css, 2.translate css -> common JS, 3.create style-node from JS string
           use: ["style-loader", "css-loader", "sass-loader"],
         },
+        {
+          test: /.svg/,
+          use: [{ loader: "svg-url-loader", options: { limit: 10000 } }],
+        },
       ],
     },
     resolve: {
