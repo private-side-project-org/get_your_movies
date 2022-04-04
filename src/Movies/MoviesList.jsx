@@ -9,14 +9,20 @@ import "./moviesList.scss";
 const propTypes = {
   movies: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.string,
+      id: PropTypes.number,
     }).isRequired
   ),
   hasNextPage: PropTypes.bool.isRequired,
   fetchNextPage: PropTypes.func.isRequired,
+  onSetSelectedMovie: PropTypes.func.isRequired,
 };
 
-const MoviesList = ({ movies, hasNextPage, fetchNextPage }) => {
+const MoviesList = ({
+  movies,
+  hasNextPage,
+  fetchNextPage,
+  onSetSelectedMovie,
+}) => {
   const ref = useRef();
   const callback = (entries) => {
     entries.forEach((entry) => {
@@ -42,9 +48,16 @@ const MoviesList = ({ movies, hasNextPage, fetchNextPage }) => {
   }, []);
 
   return (
-    <div ref={ref} className="movies-list">
-      {movies.map((movie) => {
-        return <MoviesListItem key={movie.id} movie={movie} />;
+    <div ref={ref} className="moviesList-container">
+      {movies.map((movie, index) => {
+        return (
+          <MoviesListItem
+            key={movie.id}
+            movie={movie}
+            isFirstMovie={index === 0}
+            onSetSelectedMovie={onSetSelectedMovie}
+          />
+        );
       })}
       {hasNextPage && (
         <div id="loader">

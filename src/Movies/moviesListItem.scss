@@ -1,0 +1,25 @@
+.moviesListItem {
+  &-container {
+    padding: 8px;
+    margin-bottom: 16px;
+    margin-right: 8px;
+    border: 1px solid gray;
+    border-radius: 4px;
+    &:hover {
+      background-color: lightgray;
+      > img {
+        opacity: 0.8;
+      }
+      cursor: pointer;
+      box-shadow: 5px 5px 5px;
+    }
+
+    > img:not(.moviesListItem-no-image) {
+      width: 100%;
+      max-width: fit-content;
+    }
+  }
+  &-no-image {
+    width: 100px;
+  }
+}

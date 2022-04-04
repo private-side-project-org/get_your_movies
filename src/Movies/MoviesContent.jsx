@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import useSearchMovies from "../queries/useSearchMovies";
 import MoviesList from "./MoviesList";
+import MoviePanel from "./MoviePanel";
 import debounce from "lodash/debounce";
 
 import "./moviesContent.scss";
 
 const Movies = () => {
   const [search, setSearch] = useState("");
+  const [selectedMovie, setSelectedMovie] = useState(null);
   const {
     movies,
     loadingMovies,
@@ -20,21 +22,25 @@ const Movies = () => {
   }, 500);
 
   return (
-    <div id="top">
-      <input onChange={handleSearch} />
-      {!loadingMovies && movies?.length > 0 && (
-        <>
-          <MoviesList
-            movies={movies}
-            hasNextPage={hasNextPage}
-            fetchNextPage={fetchNextPage}
-            isFetchingNextPage={isFetchingNextPage}
-          />
-        </>
-      )}
-      <a href="#top" className="to-top-anchor">
-        <span>Top</span>
-      </a>
+    <div className="moviesContent-container">
+      <div className="moviesContent-movies-list-wrapper">
+        <input onChange={handleSearch} />
+        {!loadingMovies && movies?.length > 0 && (
+          <>
+            <MoviesList
+              movies={movies}
+              hasNextPage={hasNextPage}
+              fetchNextPage={fetchNextPage}
+              isFetchingNextPage={isFetchingNextPage}
+              onSetSelectedMovie={setSelectedMovie}
+            />
+          </>
+        )}
+        <a href="#top" className="moviesContent-anchor-to-top">
+          <span>Top</span>
+        </a>
+      </div>
+      {selectedMovie && <MoviePanel selectedMovie={selectedMovie} />}
     </div>
   );
 };

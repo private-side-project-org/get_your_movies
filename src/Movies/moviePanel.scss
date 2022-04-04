@@ -1,14 +1,37 @@
-.moviePanel-container {
-  display: flex;
-  padding: 16px;
-  position: relative;
+@import "assets/mixin.scss";
 
-  .moviePanel-image-container {
+.moviePanel {
+  &-container {
+    overflow: scroll;
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    position: relative;
+    max-width: 500px;
+
+    @include mq(sm) {
+      max-width: none;
+    }
+
+    @include mq(xl) {
+      flex-direction: row;
+      .moviePanel-image-container {
+        margin-right: 24px;
+      }
+    }
+  }
+
+  &-image-container {
     object-fit: none;
   }
 
-  .moviePanel-detail-container {
+  &-detail-container {
     display: flex;
     flex-direction: column;
+    gap: 16px;
+
+    > ul {
+      gap: 16px;
+    }
   }
 }

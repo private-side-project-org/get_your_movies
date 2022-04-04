@@ -8,7 +8,7 @@ import "./moviePanel.scss";
 
 const propTypes = {
   selectedMovie: PropTypes.shape({
-    id: PropTypes.string,
+    id: PropTypes.number,
   }).isRequired,
 };
 
@@ -33,18 +33,34 @@ const MoviePanel = ({ selectedMovie }) => {
           <div className="moviePanel-image-container">
             <img src={poster} alt="poster" />
           </div>
-          <div className="moviePanel-detail-contaienr">
-            <h3>Title</h3>
-            <ul>
-              <li>genre</li>
+          <div className="moviePanel-detail-container">
+            <h2>{movie.title}</h2>
+            <ul className="flex-row">
+              <h4>Genre</h4>
+              {movie.genres.map((genre) => {
+                return (
+                  <li key={genre.id} className="label">
+                    {genre.name}
+                  </li>
+                );
+              })}
             </ul>
-            <ul>
-              <li>language</li>
+            <ul className="flex-row">
+              <h4>Language</h4>
+              {movie.spoken_languages.map((lang) => {
+                return (
+                  <li key={lang.english_name} className="label">
+                    {lang.name}
+                  </li>
+                );
+              })}
             </ul>
-            <p>description</p>
-            <ul>
-              <li>production companyA</li>
-              <li>production companyB</li>
+            <p>{movie.overview}</p>
+            <ul className="flex-column">
+              <h4>Productions:</h4>
+              {movie.production_companies.map((company) => {
+                return <li key={company.id}>{company.name}</li>;
+              })}
             </ul>
           </div>
         </>

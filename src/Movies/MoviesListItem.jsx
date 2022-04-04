@@ -1,5 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
+import getMoviePath from "utils/getMovieImage";
+
+import "./moviesListItem.scss";
+
+const noImageAvailable = require("assets/icons/camera-reel.svg");
 
 const propTypes = {
   movie: PropTypes.shape({
@@ -8,19 +13,26 @@ const propTypes = {
     overview: PropTypes.string,
     backdrop_path: PropTypes.string,
   }).isRequired,
+  onSetSelectedMovie: PropTypes.func.isRequired,
+  isFirstMovie: PropTypes.bool.isRequired,
 };
 
-const MoviesListItem = ({ movie }) => {
+const MoviesListItem = ({ movie, onSetSelectedMovie, isFirstMovie }) => {
   const { original_title, overview, backdrop_path } = movie;
-  const imageBaseUrl = "https://image.tmdb.org/t/p/";
-  const imageSize = "w300";
   return (
-    <div>
+    <div
+      className="moviesListItem-container"
+      onClick={() => onSetSelectedMovie(movie)}
+      id={isFirstMovie ? "top" : ""}
+    >
       <h3>{original_title}</h3>
-      {backdrop_path && (
+      {backdrop_path ? (
+        <img src={getMoviePath(backdrop_path, 300)} alt="movie_label" />
+      ) : (
         <img
-          src={`${imageBaseUrl}${imageSize}${backdrop_path}`}
-          alt="movie_label"
+          src={noImageAvailable}
+          alt="no_image_available"
+          className="moviesListItem-no-image"
         />
       )}
       <p>{overview}</p>
