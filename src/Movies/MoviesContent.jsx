@@ -23,7 +23,11 @@ const Movies = () => {
 
   return (
     <div className="moviesContent-container">
-      <div className="moviesContent-movies-list-wrapper">
+      <div
+        className={`moviesContent-movies-list-wrapper ${
+          selectedMovie ? "movie-selected" : ""
+        }`}
+      >
         <input onChange={handleSearch} />
         {!loadingMovies && movies?.length > 0 && (
           <>
@@ -40,7 +44,12 @@ const Movies = () => {
           <span>Top</span>
         </a>
       </div>
-      {selectedMovie && <MoviePanel selectedMovie={selectedMovie} />}
+      {selectedMovie && (
+        <MoviePanel
+          selectedMovie={selectedMovie}
+          onSetSelectedMovie={setSelectedMovie}
+        />
+      )}
     </div>
   );
 };

@@ -7,22 +7,52 @@
     flex-direction: column;
     padding: 16px;
     position: relative;
-    max-width: 500px;
+    max-width: 710px;
 
-    @include mq(sm) {
+    .moviePanel-image-container {
+      max-width: 400px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      margin-right: 24px;
+    }
+
+    @include mq(md) {
+      flex: 2;
       max-width: none;
     }
 
     @include mq(xl) {
       flex-direction: row;
-      .moviePanel-image-container {
-        margin-right: 24px;
-      }
+    }
+  }
+
+  &-arrow {
+    width: fit-content;
+    display: flex;
+    white-space: nowrap;
+    align-items: center;
+    gap: 16px;
+    cursor: pointer;
+    margin-bottom: 16px;
+    opacity: 0.6;
+
+    > img {
+      width: 32px;
+    }
+
+    &:hover {
+      opacity: 1;
+    }
+
+    @include mq(md) {
+      display: none;
     }
   }
 
   &-image-container {
     object-fit: none;
+    max-width: 420px;
   }
 
   &-detail-container {
