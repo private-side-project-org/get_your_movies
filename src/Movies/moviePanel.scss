@@ -23,10 +23,16 @@
     @include mq(md) {
       flex: 2;
       max-width: none;
+      padding: 80px;
     }
 
     @include mq(xl) {
       flex-direction: row;
+      align-items: center;
+      background-image: url("assets/image/tv_sample.png");
+      background-repeat: no-repeat;
+      background-size: cover;
+      padding-left: 130px;
     }
   }
 
@@ -66,6 +72,10 @@
     > ul {
       gap: 16px;
     }
+
+    @include mq(xl) {
+      width: 40%;
+    }
   }
 
   &-title-wrapper {
@@ -73,9 +83,11 @@
     justify-content: space-between;
 
     > button {
+      height: fit-content;
       border-radius: 24px;
       padding: 12px 16px;
       cursor: pointer;
+      white-space: nowrap;
       background-color: cornflowerblue;
       color: white;
       border: 1px solid cornflowerblue;

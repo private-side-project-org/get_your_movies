@@ -9,7 +9,7 @@ module.exports = () => {
   return {
     entry: path.resolve(__dirname, "/src"),
     output: {
-      path: path.resolve(__dirname, "/public"),
+      path: path.resolve(__dirname, "public"),
       filename: "build.js",
     },
     devtool: "inline-source-map",
@@ -23,11 +23,24 @@ module.exports = () => {
         {
           test: /.s?css$/,
           // right to left: 1.compile sass -> css, 2.translate css -> common JS, 3.create style-node from JS string
-          use: ["style-loader", "css-loader", "sass-loader"],
+          use: [
+            "style-loader",
+            {
+              loader: "css-loader",
+              options: {
+                url: true,
+              },
+            },
+            "sass-loader",
+          ],
         },
         {
           test: /.svg/,
           use: [{ loader: "svg-url-loader", options: { limit: 10000 } }],
+        },
+        {
+          test: /.(png|jpg?g|gif)$/i,
+          type: "asset/resource",
         },
       ],
     },

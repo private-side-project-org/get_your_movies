@@ -1,4 +1,4 @@
-@import "assets/mixin.scss";
+@use "assets/variables" as *;
 
 .moviesContent {
   &-container {
@@ -10,12 +10,36 @@
     }
   }
 
-  &-movies-list-wrapper {
+  &-tabs {
+    display: flex;
+    gap: 16px;
+    > h4 {
+      border: 1px solid lightgray;
+      padding: 4px 8px;
+      border-radius: 6px 6px 0px 0px;
+      border-bottom: none;
+      cursor: pointer;
+      &:hover {
+        opacity: 0.6;
+      }
+    }
+
+    .active {
+      background-color: lightgray;
+    }
+
+    .disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+  }
+
+  &-left-panel {
     display: flex;
     flex-direction: column;
     position: relative;
-    height: calc(100vh - 40px);
-    padding: 16px 0px 16px 8px;
+    height: calc(100vh - 20px);
+    padding: 16px 0px 0px 8px;
     overflow: scroll;
     flex: 1;
 
@@ -40,6 +64,16 @@
       margin-bottom: 16px;
       margin-right: 8px;
     }
+  }
+
+  &-list-wrapper {
+    border: 1px solid lightgray;
+    flex: 1;
+    border-radius: 0px 6px 6px 6px;
+    padding: 8px 8px 0px 8px;
+    overflow: scroll;
+    scroll-behavior: smooth;
+    margin-right: 8px;
   }
 
   &-anchor-to-top {
