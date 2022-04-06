@@ -1,4 +1,4 @@
-@import "assets/mixin.scss";
+@use "assets/variables" as *;
 
 .moviePanel {
   &-container {
@@ -10,6 +10,9 @@
     max-width: 710px;
 
     .moviePanel-image-container {
+      animation-name: moveRight;
+      animation-duration: 0.5s;
+      animation-timing-function: ease-in-out;
       max-width: 400px;
       width: 100%;
       display: flex;
@@ -62,6 +65,27 @@
 
     > ul {
       gap: 16px;
+    }
+  }
+
+  &-title-wrapper {
+    display: flex;
+    justify-content: space-between;
+
+    > button {
+      border-radius: 24px;
+      padding: 12px 16px;
+      cursor: pointer;
+      background-color: cornflowerblue;
+      color: white;
+      border: 1px solid cornflowerblue;
+      &:hover {
+        opacity: 0.8;
+      }
+      &:active {
+        background-color: white;
+        color: lightslategrey;
+      }
     }
   }
 }

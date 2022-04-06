@@ -1,3 +1,5 @@
+@use "assets/variables" as *;
+
 .moviesListItem {
   &-container {
     display: flex;
@@ -9,6 +11,10 @@
     border: 1px solid gray;
     border-radius: 4px;
     gap: 8px;
+
+    animation-name: moveRight;
+    animation-duration: 0.5s;
+    animation-timing-function: ease-in;
 
     > p {
       display: -webkit-box;
@@ -31,6 +37,7 @@
       max-width: fit-content;
     }
   }
+
   &-no-image {
     width: 100px;
   }
