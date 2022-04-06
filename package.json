@@ -7,7 +7,8 @@
     "test": "jest",
     "start": "webpack serve --mode development",
     "prepare": "husky install",
-    "lint-staged": "lint-staged"
+    "lint-staged": "lint-staged",
+    "build": "webpack"
   },
   "lint-staged": {
     "*.{js,jsx}": [
@@ -27,12 +28,13 @@
   "homepage": "https://github.com/private-side-project-org/get_your_movies#readme",
   "dependencies": {
     "core-js": "3.21.1",
-    "lodash": "^4.17.21",
+    "lodash": "4.17.21",
     "prop-types": "^15.8.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-query": "3.34.19",
     "react-spinners": "0.11.0",
+    "react-toastify": "8.2.0",
     "sass": "1.49.11"
   },
   "devDependencies": {
