@@ -1,17 +1,16 @@
 import { useQuery } from "react-query";
 import { request } from "utils/request";
 
-const fetchMovieById = ({ queryKey }) => {
-  console.log(queryKey);
-  const url = `/movie/${queryKey[1]}?api_key=${process.env.API_KEY}`;
-  const response = request(url, {
-    method: "GET",
-  });
+export default (id, { enabled }) => {
+  const fetchMovieById = () => {
+    const url = `/movie/${id}?api_key=${process.env.API_KEY}`;
+    const response = request(url, {
+      method: "GET",
+    });
 
-  return response;
-};
+    return response;
+  };
 
-export default (id) => {
   const {
     data: movie,
     isLoading,
@@ -23,7 +22,7 @@ export default (id) => {
     onError: (err) => {
       console.log("error", err);
     },
-    enabled: !!id,
+    enabled,
   });
 
   return {

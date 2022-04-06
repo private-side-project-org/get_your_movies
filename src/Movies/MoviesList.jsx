@@ -12,9 +12,10 @@ const propTypes = {
       id: PropTypes.number,
     }).isRequired
   ),
-  hasNextPage: PropTypes.bool.isRequired,
+  hasNextPage: PropTypes.bool,
   fetchNextPage: PropTypes.func.isRequired,
   onSetSelectedMovie: PropTypes.func.isRequired,
+  selectedTab: PropTypes.string.isRequired,
 };
 
 const MoviesList = ({
@@ -22,13 +23,13 @@ const MoviesList = ({
   hasNextPage,
   fetchNextPage,
   onSetSelectedMovie,
+  selectedTab,
 }) => {
   const ref = useRef();
   const callback = (entries) => {
     entries.forEach((entry) => {
       const intersecting = entry.isIntersecting;
       if (intersecting && hasNextPage) {
-        console.log("fetch netxt page");
         fetchNextPage();
       }
     });
@@ -59,7 +60,7 @@ const MoviesList = ({
           />
         );
       })}
-      {hasNextPage && (
+      {hasNextPage && selectedTab !== "favorite" && (
         <div id="loader">
           <SyncLoader color="#000000" size={15} />
         </div>
@@ -69,5 +70,9 @@ const MoviesList = ({
 };
 
 MoviesList.propTypes = propTypes;
+
+MoviesList.defaultProps = {
+  hasNextPage: false,
+};
 
 export default MoviesList;
