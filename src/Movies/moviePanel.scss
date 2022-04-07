@@ -17,7 +17,15 @@
       width: 100%;
       display: flex;
       flex-direction: column;
-      margin-right: 24px;
+      margin-bottom: 24px;
+
+      > img {
+        border-radius: 6px;
+      }
+
+      @include mq(xl) {
+        margin-right: 24px;
+      }
     }
 
     @include mq(md) {
@@ -30,6 +38,9 @@
       flex-direction: row;
       align-items: center;
       background-image: url("assets/image/tv_sample.png");
+      animation-name: opacity;
+      animation-duration: 1s;
+      animation-timing-function: cubic-bezier(1, 1, 1, 1);
       background-repeat: no-repeat;
       background-size: cover;
       padding-left: 130px;
@@ -97,6 +108,10 @@
       &:active {
         background-color: white;
         color: lightslategrey;
+      }
+
+      &.remove {
+        background: lightcoral;
       }
     }
   }
