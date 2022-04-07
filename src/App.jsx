@@ -1,6 +1,5 @@
 import React from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
-import { ReactQueryDevtools } from "react-query/devtools";
 import { ToastContainer } from "react-toastify";
 import { SavedMoviesProvider } from "hooks/useSavedMovies";
 import Movies from "./Movies/MoviesContent";
@@ -30,7 +29,6 @@ const App = () => {
         <Movies />
       </SavedMoviesProvider>
       <ToastContainer {...toastOptions} />
-      <ReactQueryDevtools />
     </QueryClientProvider>
   );
 };
