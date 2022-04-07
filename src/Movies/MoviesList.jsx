@@ -42,7 +42,6 @@ const MoviesList = ({
 
   useEffect(() => {
     const loader = document.getElementById("loader");
-    console.log("loader", loader);
     if (loader) {
       observer.observe(loader);
     }
@@ -57,6 +56,7 @@ const MoviesList = ({
             movie={movie}
             isFirstMovie={index === 0}
             onSetSelectedMovie={onSetSelectedMovie}
+            selectedTab={selectedTab}
           />
         );
       })}

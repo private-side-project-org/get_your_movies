@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import getMoviePath from "utils/getMovieImage";
+import useSavedMovies from "hooks/useSavedMovies";
 
 import "./moviesListItem.scss";
 
@@ -15,14 +16,20 @@ const propTypes = {
   }).isRequired,
   onSetSelectedMovie: PropTypes.func.isRequired,
   isFirstMovie: PropTypes.bool.isRequired,
+  selectedTab: PropTypes.string.isRequired,
 };
 
 const MoviesListItem = ({ movie, onSetSelectedMovie, isFirstMovie }) => {
+  const { getFavoriteMovie } = useSavedMovies();
   const { original_title, overview, backdrop_path } = movie;
   return (
     <div
       className="moviesListItem-container"
-      onClick={() => onSetSelectedMovie(movie)}
+      onClick={() => {
+        const favoriteMovie = getFavoriteMovie(movie);
+        const movieToBeSet = favoriteMovie || { id: movie.id };
+        onSetSelectedMovie(movieToBeSet);
+      }}
       id={isFirstMovie ? "top" : ""}
     >
       <h3>{original_title}</h3>

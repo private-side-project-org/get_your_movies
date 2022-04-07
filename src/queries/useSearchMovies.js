@@ -1,19 +1,18 @@
 import { useInfiniteQuery } from "react-query";
 import { request } from "utils/request";
 
-const fetchMovies = async ({ queryKey, pageParam }) => {
-  console.log("page param", pageParam);
-  const url = `/search/movie?api_key=${process.env.API_KEY}&query=${queryKey[1].search}&page=${pageParam}`;
-  const response = request(url, {
-    method: "GET",
-  });
-
-  return response;
-};
-
 export default (query) => {
+  const fetchMovies = async ({ pageParam }) => {
+    const url = `/search/movie?api_key=${process.env.API_KEY}&query=${query.search}&page=${pageParam}`;
+    const response = request(url, {
+      method: "GET",
+    });
+
+    return response;
+  };
+
   const { data, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } =
-    useInfiniteQuery(["movies", query], fetchMovies, {
+    useInfiniteQuery(["movies", query.search], fetchMovies, {
       onSuccess: () => {
         console.log("success");
       },
@@ -28,15 +27,13 @@ export default (query) => {
       enabled: !!query.search,
     });
 
-  console.log("data", data);
-
   const flattenData = data?.pages.reduce((movies, page) => {
     movies.push(...page.results);
     return movies;
   }, []);
 
   return {
-    movies: flattenData,
+    movies: flattenData || [],
     loadingMovies: isLoading,
     fetchNextPage,
     hasNextPage,

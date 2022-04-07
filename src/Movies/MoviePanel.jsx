@@ -4,6 +4,7 @@ import useGetMovieById from "queries/useGetMovieById";
 import getMovieImage from "utils/getMovieImage";
 import ClipLoader from "react-spinners/ClipLoader";
 import { toast } from "react-toastify";
+import useSavedMovies from "hooks/useSavedMovies";
 
 import "./moviePanel.scss";
 
@@ -25,33 +26,48 @@ const loaderStyle = {
 };
 
 const MoviePanel = ({ selectedMovie, onSetSelectedMovie, selectedTab }) => {
+  const { favoriteMovieList, getFavoriteMovie, setFavoriteMovieList } =
+    useSavedMovies();
+  const favoriteMovie = getFavoriteMovie(selectedMovie);
+
   const { movie, isLoading, isFetching } = useGetMovieById(selectedMovie.id, {
-    enabled: selectedTab !== "favorite",
+    enabled: selectedTab !== "favorite" && !favoriteMovie,
   });
 
-  const displayMovie = selectedTab !== "favorite" ? movie : selectedMovie;
-  console.log("displaymovie", displayMovie);
+  const displayMovie = favoriteMovie || movie;
 
   const poster = displayMovie?.poster_path
     ? getMovieImage(displayMovie?.poster_path, 400)
     : noImageAvailable;
 
   const handleSaveMovie = () => {
-    const savedMovies = JSON.parse(localStorage.getItem("movies")) || [];
-    const hasSaved = savedMovies?.some(
+    const hasSaved = favoriteMovieList?.some(
       (savedMovie) => savedMovie.id === movie.id
     );
 
     if (!hasSaved) {
       localStorage.setItem(
         "movies",
-        JSON.stringify([...savedMovies, { ...movie }])
+        JSON.stringify([...favoriteMovieList, { ...movie }])
       );
+      setFavoriteMovieList([...favoriteMovieList, { ...movie }]);
       onSetSelectedMovie(movie);
       toast.success("Movie has been saved");
     } else {
       toast.error("You've already saved movie");
     }
+  };
+
+  const handleRemoveMovie = () => {
+    const favoriteMovieList = JSON.parse(localStorage.getItem("movies"));
+    const removeMovieIndex = favoriteMovieList.findIndex(
+      (movie) => movie.id === selectedMovie.id
+    );
+    favoriteMovieList.splice(removeMovieIndex, 1);
+    setFavoriteMovieList(favoriteMovieList);
+    localStorage.setItem("movies", JSON.stringify(favoriteMovieList));
+    onSetSelectedMovie({ id: selectedMovie.id });
+    toast.error("Movie has been removed");
   };
 
   return (
@@ -73,11 +89,15 @@ const MoviePanel = ({ selectedMovie, onSetSelectedMovie, selectedTab }) => {
           <div className="moviePanel-detail-container">
             <div className="moviePanel-title-wrapper">
               <h2>{displayMovie.title}</h2>
-              {selectedTab !== "favorite" && (
-                <button type="button" onClick={handleSaveMovie}>
-                  Save movie
+              {
+                <button
+                  type="button"
+                  onClick={favoriteMovie ? handleRemoveMovie : handleSaveMovie}
+                  className={`${favoriteMovie ? "remove" : ""}`}
+                >
+                  {favoriteMovie ? "Remove" : "Save movie"}
                 </button>
-              )}
+              }
             </div>
             <div className="flex-row">
               <h4>Genre</h4>

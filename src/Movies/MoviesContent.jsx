@@ -6,6 +6,8 @@ import debounce from "lodash/debounce";
 
 import "./moviesContent.scss";
 
+const clapperBoard = require("assets/icons/clapperboard.svg");
+
 const Movies = () => {
   const [search, setSearch] = useState("");
   const [selectedMovie, setSelectedMovie] = useState(null);
@@ -34,6 +36,42 @@ const Movies = () => {
       ? favoriteMovieList
       : movies;
 
+  const movieListRender = () => {
+    if (selectedTab === "favorite" && movielist.length === 0) {
+      return (
+        <div className="moviesContent-no-result">
+          <img src={clapperBoard} alt="clapper_board" />
+          <h2>No favorite movie yet</h2>
+          <p>You can save your favorite movies here.</p>
+        </div>
+      );
+    }
+
+    return (
+      <>
+        {!loadingMovies && movielist?.length > 0 ? (
+          <MoviesList
+            movies={movielist}
+            hasNextPage={hasNextPage}
+            fetchNextPage={fetchNextPage}
+            isFetchingNextPage={isFetchingNextPage}
+            onSetSelectedMovie={setSelectedMovie}
+            selectedTab={selectedTab}
+          />
+        ) : (
+          <div className="moviesContent-no-result">
+            <img src={clapperBoard} alt="clapper_board" />
+            <h2>No result found</h2>
+            <p>
+              Or, you didn&apos;t try search? <br /> Get your movie from search
+              bar.
+            </p>
+          </div>
+        )}
+      </>
+    );
+  };
+
   return (
     <div className="moviesContent-container">
       <div
@@ -51,27 +89,18 @@ const Movies = () => {
             Search result
           </h4>
           <h4
-            className={`${selectedTab === "favorite" ? "active" : ""}${
-              !favoriteMovieList ? "disabled" : ""
-            }`}
-            onClick={() => {
-              if (favoriteMovieList) handleClickTab("favorite");
-            }}
+            className={`${selectedTab === "favorite" ? "active" : ""}`}
+            onClick={() => handleClickTab("favorite")}
           >
             Your favorites
           </h4>
         </div>
-        <div className="moviesContent-list-wrapper">
-          {!loadingMovies && movielist?.length > 0 && (
-            <MoviesList
-              movies={movielist}
-              hasNextPage={hasNextPage}
-              fetchNextPage={fetchNextPage}
-              isFetchingNextPage={isFetchingNextPage}
-              onSetSelectedMovie={setSelectedMovie}
-              selectedTab={selectedTab}
-            />
-          )}
+        <div
+          className={`moviesContent-list-wrapper ${
+            movielist.length === 0 ? "no-result" : ""
+          }`}
+        >
+          {movieListRender()}
         </div>
         <a href="#top" className="moviesContent-anchor-to-top">
           <span>Top</span>

@@ -15,7 +15,7 @@ export default (id, { enabled }) => {
     data: movie,
     isLoading,
     isFetching,
-  } = useQuery(["movie", id], fetchMovieById, {
+  } = useQuery(["movies", id], fetchMovieById, {
     onSuccess: () => {
       console.log("success");
     },
