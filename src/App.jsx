@@ -1,7 +1,7 @@
 import React from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ToastContainer } from "react-toastify";
-import { SavedMoviesProvider } from "hooks/useSavedMovies";
+import { SavedMovieProvider } from "hooks/useSavedMovies";
 import MovieContent from "./MovieContent/MovieContent";
 
 import "react-toastify/dist/ReactToastify.css";
@@ -27,9 +27,9 @@ const App = () => {
 
   return (
     <QueryClientProvider client={client}>
-      <SavedMoviesProvider>
+      <SavedMovieProvider>
         <MovieContent />
-      </SavedMoviesProvider>
+      </SavedMovieProvider>
       <ToastContainer {...toastOptions} />
     </QueryClientProvider>
   );

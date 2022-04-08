@@ -1,13 +1,15 @@
-// set default to not update accidentally
+// set default to not update accidentally other place
 $breakpoints: (
   "sm": "screen and (min-width: 400px)",
   "md": "screen and (min-width: 768px)",
-  "lg": "screen and (min-width: 1000px)",
-  "xl": "screen and (min-width: 1300px)",
+  "lg": "screen and (min-width: 992px)",
+  "xl": "screen and (min-width: 1200px)",
   "xxl": "screen and (min-width: 1400px)",
-  "smHeight": "screen and (min-width: 1300px) and (max-height: 800px)",
+  "smHeight": "screen and (min-width: 1200px) and (min-height: 400px)",
+  "lgHeight": "screen and (min-width: 1200px) and (min-height: 900px)",
 ) !default;
 
+// media query mixin
 @mixin mq($breakpoint) {
   @media #{map-get($breakpoints, $breakpoint)} {
     @content;
