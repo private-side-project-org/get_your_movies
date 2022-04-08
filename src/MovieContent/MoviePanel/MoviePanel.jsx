@@ -5,8 +5,11 @@ import getMovieImage from "utils/getMovieImage";
 import ClipLoader from "react-spinners/ClipLoader";
 import { toast } from "react-toastify";
 import useSavedMovies from "hooks/useSavedMovies";
+import CONSTANTS from "utils/constants";
 
 import "./moviePanel.scss";
+
+const { MOVIES } = CONSTANTS.LOCAL_STORAGE_KEYS;
 
 const arrow = require("assets/icons/arrow.svg");
 const noImageAvailable = require("assets/icons/camera-reel.svg");
@@ -16,7 +19,6 @@ const propTypes = {
     id: PropTypes.number,
   }).isRequired,
   onSetSelectedMovie: PropTypes.func.isRequired,
-  selectedTab: PropTypes.string.isRequired,
 };
 
 const loaderStyle = {
@@ -25,20 +27,20 @@ const loaderStyle = {
   left: "40%",
 };
 
-const MoviePanel = ({ selectedMovie, onSetSelectedMovie, selectedTab }) => {
+const MoviePanel = ({ selectedMovie, onSetSelectedMovie }) => {
   const { favoriteMovieList, getFavoriteMovie, setFavoriteMovieList } =
     useSavedMovies();
+
+  // single movie to be displayed on panel if exists
   const favoriteMovie = getFavoriteMovie(selectedMovie);
 
+  // query to get single movie to be displayed if favorite doesn't exist
   const { movie, isLoading, isFetching } = useGetMovieById(selectedMovie.id, {
-    enabled: selectedTab !== "favorite" && !favoriteMovie,
+    enabled: !favoriteMovie,
   });
 
+  // define which movie(favorite or movie from query) to be displayed
   const displayMovie = favoriteMovie || movie;
-
-  const poster = displayMovie?.poster_path
-    ? getMovieImage(displayMovie?.poster_path, 400)
-    : noImageAvailable;
 
   const handleSaveMovie = () => {
     const hasSaved = favoriteMovieList?.some(
@@ -47,7 +49,7 @@ const MoviePanel = ({ selectedMovie, onSetSelectedMovie, selectedTab }) => {
 
     if (!hasSaved) {
       localStorage.setItem(
-        "movies",
+        MOVIES,
         JSON.stringify([...favoriteMovieList, { ...movie }])
       );
       setFavoriteMovieList([...favoriteMovieList, { ...movie }]);
@@ -59,21 +61,30 @@ const MoviePanel = ({ selectedMovie, onSetSelectedMovie, selectedTab }) => {
   };
 
   const handleRemoveMovie = () => {
-    const favoriteMovieList = JSON.parse(localStorage.getItem("movies"));
+    // get index of the movie to be removed
     const removeMovieIndex = favoriteMovieList.findIndex(
       (movie) => movie.id === selectedMovie.id
     );
+    // take out target movie from favorite list
     favoriteMovieList.splice(removeMovieIndex, 1);
+    // set updated movie on context
     setFavoriteMovieList(favoriteMovieList);
+    // set updated movie list on local storage
     localStorage.setItem("movies", JSON.stringify(favoriteMovieList));
+
+    // set id on selectedMovie to run query after remove movie in order to persist to display movie on panel
     onSetSelectedMovie({ id: selectedMovie.id });
-    toast.error("Movie has been removed");
+    toast.success("Movie has been removed");
   };
+
+  const poster = displayMovie?.poster_path
+    ? getMovieImage(displayMovie?.poster_path, 400)
+    : noImageAvailable;
 
   return (
     <div className="moviePanel-container">
       <div className="moviePanel-scroll-wrapper">
-        {isLoading || isFetching || !poster ? (
+        {isLoading || isFetching ? (
           <ClipLoader color="#000000" css={loaderStyle} size={80} />
         ) : (
           <>

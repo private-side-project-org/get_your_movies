@@ -2,7 +2,7 @@ import React from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ToastContainer } from "react-toastify";
 import { SavedMoviesProvider } from "hooks/useSavedMovies";
-import Movies from "./Movies/MoviesContent";
+import MovieContent from "./MovieContent/MovieContent";
 
 import "react-toastify/dist/ReactToastify.css";
 import "assets/styles.scss";
@@ -16,6 +16,7 @@ const App = () => {
       },
     },
   });
+
   const toastOptions = {
     position: "top-right",
     autoClose: 1000,
@@ -23,10 +24,11 @@ const App = () => {
     closeOnClick: true,
     draggable: false,
   };
+
   return (
     <QueryClientProvider client={client}>
       <SavedMoviesProvider>
-        <Movies />
+        <MovieContent />
       </SavedMoviesProvider>
       <ToastContainer {...toastOptions} />
     </QueryClientProvider>

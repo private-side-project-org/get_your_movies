@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import getMoviePath from "utils/getMovieImage";
 import useSavedMovies from "hooks/useSavedMovies";
 
-import "./moviesListItem.scss";
+import "./movieListItem.scss";
 
 const noImageAvailable = require("assets/icons/camera-reel.svg");
 
@@ -19,7 +19,7 @@ const propTypes = {
   selectedTab: PropTypes.string.isRequired,
 };
 
-const MoviesListItem = ({ movie, onSetSelectedMovie, isFirstMovie }) => {
+const MovieListItem = ({ movie, onSetSelectedMovie, isFirstMovie }) => {
   const { getFavoriteMovie } = useSavedMovies();
   const { original_title, overview, backdrop_path } = movie;
   return (
@@ -27,9 +27,12 @@ const MoviesListItem = ({ movie, onSetSelectedMovie, isFirstMovie }) => {
       className="moviesListItem-container"
       onClick={() => {
         const favoriteMovie = getFavoriteMovie(movie);
+
+        // set favoriteMovie to prevent extra api call if exists
         const movieToBeSet = favoriteMovie || { id: movie.id };
         onSetSelectedMovie(movieToBeSet);
       }}
+      // set id #top to get user to go top when click `top` button
       id={isFirstMovie ? "top" : ""}
     >
       <h3>{original_title}</h3>
@@ -47,6 +50,6 @@ const MoviesListItem = ({ movie, onSetSelectedMovie, isFirstMovie }) => {
   );
 };
 
-MoviesListItem.propTypes = propTypes;
+MovieListItem.propTypes = propTypes;
 
-export default MoviesListItem;
+export default MovieListItem;

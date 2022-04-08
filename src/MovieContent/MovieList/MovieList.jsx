@@ -1,10 +1,10 @@
 import React, { useEffect, useRef } from "react";
 
-import MoviesListItem from "./MoviesListItem";
+import MoviesListItem from "./MovieListItem/MovieListItem";
 import SyncLoader from "react-spinners/SyncLoader";
 import PropTypes from "prop-types";
 
-import "./moviesList.scss";
+import "./movieList.scss";
 
 const propTypes = {
   movies: PropTypes.arrayOf(
@@ -18,14 +18,17 @@ const propTypes = {
   selectedTab: PropTypes.string.isRequired,
 };
 
-const MoviesList = ({
+const MovieList = ({
   movies,
   hasNextPage,
   fetchNextPage,
   onSetSelectedMovie,
   selectedTab,
 }) => {
+  // ref hook to get root node(moviesList-container)
   const ref = useRef();
+
+  // callback to execute pagination
   const callback = (entries) => {
     entries.forEach((entry) => {
       const intersecting = entry.isIntersecting;
@@ -35,11 +38,13 @@ const MoviesList = ({
     });
   };
 
+  // observer to execute callback when target node(loader) show up 100%(threshold 1) in root node
   const observer = new IntersectionObserver(callback, {
     root: ref.current,
     threshold: 1,
   });
 
+  // set target node(loader) on observer
   useEffect(() => {
     const loader = document.getElementById("loader");
     if (loader) {
@@ -69,10 +74,10 @@ const MoviesList = ({
   );
 };
 
-MoviesList.propTypes = propTypes;
+MovieList.propTypes = propTypes;
 
-MoviesList.defaultProps = {
+MovieList.defaultProps = {
   hasNextPage: false,
 };
 
-export default MoviesList;
+export default MovieList;

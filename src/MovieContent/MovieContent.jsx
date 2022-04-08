@@ -1,24 +1,32 @@
 import React, { useState } from "react";
 import useSearchMovies from "../queries/useSearchMovies";
-import MoviesList from "./MoviesList";
-import MoviePanel from "./MoviePanel";
+import MovieList from "./MovieList/MovieList";
+import MoviePanel from "./MoviePanel/MoviePanel";
 import debounce from "lodash/debounce";
+import CONSTANTS from "utils/constants";
+import useSavedMovies from "hooks/useSavedMovies";
 
-import "./moviesContent.scss";
+import "./movieContent.scss";
 
 const clapperBoard = require("assets/icons/clapperboard.svg");
+const { FAVORITE, SEARCH } = CONSTANTS.TAB_OPTIONS;
 
-const Movies = () => {
+const MovieContent = () => {
   const [search, setSearch] = useState("");
   const [selectedMovie, setSelectedMovie] = useState(null);
-  const [selectedTab, setSelectedTab] = useState("search");
+  const [selectedTab, setSelectedTab] = useState(SEARCH);
+
+  // query to get search result
   const {
-    movies,
+    searchedMovies,
     loadingMovies,
     hasNextPage,
     fetchNextPage,
     isFetchingNextPage,
   } = useSearchMovies({ search });
+
+  // context movie list from localstorage
+  const { favoriteMovieList } = useSavedMovies();
 
   const handleSearch = debounce((e) => {
     setSearch(e.target.value);
@@ -30,14 +38,15 @@ const Movies = () => {
     }
   };
 
-  const favoriteMovieList = JSON.parse(localStorage.getItem("movies"));
   const movielist =
-    selectedTab === "favorite" && favoriteMovieList
+    selectedTab === FAVORITE && favoriteMovieList
       ? favoriteMovieList
-      : movies;
+      : searchedMovies;
 
+  // list field render
   const movieListRender = () => {
-    if (selectedTab === "favorite" && movielist.length === 0) {
+    // render no favorite
+    if (selectedTab === FAVORITE && movielist.length === 0) {
       return (
         <div className="moviesContent-no-result">
           <img src={clapperBoard} alt="clapper_board" />
@@ -50,7 +59,8 @@ const Movies = () => {
     return (
       <>
         {!loadingMovies && movielist?.length > 0 ? (
-          <MoviesList
+          // render search result
+          <MovieList
             movies={movielist}
             hasNextPage={hasNextPage}
             fetchNextPage={fetchNextPage}
@@ -59,6 +69,7 @@ const Movies = () => {
             selectedTab={selectedTab}
           />
         ) : (
+          // render no result found
           <div className="moviesContent-no-result">
             <img src={clapperBoard} alt="clapper_board" />
             <h2>No result found</h2>
@@ -83,14 +94,14 @@ const Movies = () => {
         <input onChange={handleSearch} placeholder="type keyword here..." />
         <div className="moviesContent-tabs">
           <h4
-            className={selectedTab === "search" ? "active" : ""}
-            onClick={() => handleClickTab("search")}
+            className={selectedTab === SEARCH ? "active" : ""}
+            onClick={() => handleClickTab(SEARCH)}
           >
             Search result
           </h4>
           <h4
-            className={`${selectedTab === "favorite" ? "active" : ""}`}
-            onClick={() => handleClickTab("favorite")}
+            className={`${selectedTab === FAVORITE ? "active" : ""}`}
+            onClick={() => handleClickTab(FAVORITE)}
           >
             Your favorites
           </h4>
@@ -110,11 +121,10 @@ const Movies = () => {
         <MoviePanel
           selectedMovie={selectedMovie}
           onSetSelectedMovie={setSelectedMovie}
-          selectedTab={selectedTab}
         />
       )}
     </div>
   );
 };
 
-export default Movies;
+export default MovieContent;
