@@ -72,69 +72,73 @@ const MoviePanel = ({ selectedMovie, onSetSelectedMovie, selectedTab }) => {
 
   return (
     <div className="moviePanel-container">
-      {isLoading || isFetching || !poster ? (
-        <ClipLoader color="#000000" css={loaderStyle} size={80} />
-      ) : (
-        <>
-          <div className="moviePanel-image-container">
-            <div
-              className="moviePanel-arrow"
-              onClick={() => onSetSelectedMovie(null)}
-            >
-              <img src={arrow} alt="back_to_list_arrow" />
-              <p>Back to the list</p>
+      <div className="moviePanel-scroll-wrapper">
+        {isLoading || isFetching || !poster ? (
+          <ClipLoader color="#000000" css={loaderStyle} size={80} />
+        ) : (
+          <>
+            <div className="moviePanel-image-container">
+              <div
+                className="moviePanel-arrow"
+                onClick={() => onSetSelectedMovie(null)}
+              >
+                <img src={arrow} alt="back_to_list_arrow" />
+                <p>Back to the list</p>
+              </div>
+              <img src={poster} alt="poster" />
             </div>
-            <img src={poster} alt="poster" />
-          </div>
-          <div className="moviePanel-detail-container">
-            <div className="moviePanel-title-wrapper">
-              <h2>{displayMovie.title}</h2>
-              {
-                <button
-                  type="button"
-                  onClick={favoriteMovie ? handleRemoveMovie : handleSaveMovie}
-                  className={`${favoriteMovie ? "remove" : ""}`}
-                >
-                  {favoriteMovie ? "Remove" : "Save movie"}
-                </button>
-              }
+            <div className="moviePanel-detail-container">
+              <div className="moviePanel-title-wrapper">
+                <h2>{displayMovie.title}</h2>
+                {
+                  <button
+                    type="button"
+                    onClick={
+                      favoriteMovie ? handleRemoveMovie : handleSaveMovie
+                    }
+                    className={`${favoriteMovie ? "remove" : ""}`}
+                  >
+                    {favoriteMovie ? "Remove" : "Save movie"}
+                  </button>
+                }
+              </div>
+              <div className="flex-row">
+                <h4>Genre</h4>
+                <ul className="flex-row">
+                  {displayMovie?.genres.map((genre) => {
+                    return (
+                      <li key={genre.id} className="label">
+                        {genre.name}
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+              <div className="flex-row">
+                <h4>Language</h4>
+                <ul className="flex-row">
+                  {displayMovie?.spoken_languages.map((lang) => {
+                    return (
+                      <li key={lang.english_name} className="label">
+                        {lang.name}
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+              <p>{displayMovie.overview}</p>
+              <div className="flex-row">
+                <h4>Productions:</h4>
+                <ul className="flex-column">
+                  {displayMovie.production_companies.map((company) => {
+                    return <li key={company.id}>{company.name}</li>;
+                  })}
+                </ul>
+              </div>
             </div>
-            <div className="flex-row">
-              <h4>Genre</h4>
-              <ul className="flex-row">
-                {displayMovie?.genres.map((genre) => {
-                  return (
-                    <li key={genre.id} className="label">
-                      {genre.name}
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
-            <div className="flex-row">
-              <h4>Language</h4>
-              <ul className="flex-row">
-                {displayMovie?.spoken_languages.map((lang) => {
-                  return (
-                    <li key={lang.english_name} className="label">
-                      {lang.name}
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
-            <p>{displayMovie.overview}</p>
-            <div className="flex-row">
-              <h4>Productions:</h4>
-              <ul className="flex-column">
-                {displayMovie.production_companies.map((company) => {
-                  return <li key={company.id}>{company.name}</li>;
-                })}
-              </ul>
-            </div>
-          </div>
-        </>
-      )}
+          </>
+        )}
+      </div>
     </div>
   );
 };

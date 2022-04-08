@@ -13,7 +13,7 @@
       animation-name: moveRight;
       animation-duration: 0.5s;
       animation-timing-function: ease-in-out;
-      max-width: 400px;
+      max-width: 250px;
       width: 100%;
       display: flex;
       flex-direction: column;
@@ -42,8 +42,27 @@
       animation-duration: 1s;
       animation-timing-function: cubic-bezier(1, 1, 1, 1);
       background-repeat: no-repeat;
-      background-size: cover;
-      padding-left: 130px;
+      background-size: 100% 100%;
+      padding: 10% 4% 8% 6%;
+    }
+
+    @include mq(smHeight) {
+      padding: 7% 4% 6% 6%;
+    }
+
+    @include mq(xxl) {
+      padding-left: 10%;
+    }
+  }
+
+  &-scroll-wrapper {
+    height: 100%;
+    overflow: scroll;
+    display: flex;
+    flex-direction: column;
+
+    @include mq(xl) {
+      flex-direction: row;
     }
   }
 
@@ -68,11 +87,6 @@
     @include mq(md) {
       display: none;
     }
-  }
-
-  &-image-container {
-    object-fit: none;
-    max-width: 420px;
   }
 
   &-detail-container {
