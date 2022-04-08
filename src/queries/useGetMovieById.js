@@ -16,9 +16,6 @@ export default (id, { enabled }) => {
     isLoading,
     isFetching,
   } = useQuery(["movies", id], fetchMovieById, {
-    onSuccess: () => {
-      console.log("success");
-    },
     onError: (err) => {
       console.log("error", err);
     },

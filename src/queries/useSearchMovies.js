@@ -2,7 +2,7 @@ import { useInfiniteQuery } from "react-query";
 import { request } from "utils/request";
 
 export default (query) => {
-  const fetchMovies = async ({ pageParam }) => {
+  const fetchMovies = async ({ pageParam = 1 }) => {
     const url = `/search/movie?api_key=${process.env.API_KEY}&query=${query.search}&page=${pageParam}`;
     const response = request(url, {
       method: "GET",
@@ -13,12 +13,11 @@ export default (query) => {
 
   const { data, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useInfiniteQuery(["movies", query.search], fetchMovies, {
-      onSuccess: () => {
-        console.log("success");
-      },
       onError: () => {
         console.log("error");
       },
+      // callback to be executed by fatchNextPage
+      // return next page to query callback(pageParam) if exists
       getNextPageParam: (lastPage) => {
         return lastPage.page + 1 < lastPage.total_pages
           ? lastPage.page + 1
@@ -33,7 +32,7 @@ export default (query) => {
   }, []);
 
   return {
-    movies: flattenData || [],
+    searchedMovies: flattenData || [],
     loadingMovies: isLoading,
     fetchNextPage,
     hasNextPage,
