@@ -2,32 +2,13 @@
 
 .moviePanel {
   &-container {
-    overflow: scroll;
     display: flex;
     flex-direction: column;
     padding: 16px;
     position: relative;
     max-width: 710px;
 
-    .moviePanel-image-container {
-      animation-name: moveRight;
-      animation-duration: 0.5s;
-      animation-timing-function: ease-in-out;
-      max-width: 250px;
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      margin-bottom: 24px;
-
-      > img {
-        border-radius: 6px;
-      }
-
-      @include mq(xl) {
-        margin-right: 24px;
-      }
-    }
-
+    // media queries
     @include mq(md) {
       flex: 2;
       max-width: none;
@@ -39,34 +20,72 @@
       align-items: center;
       background-image: url("assets/image/tv_sample.png");
       animation-name: opacity;
+
+      // animation
       animation-duration: 1s;
       animation-timing-function: cubic-bezier(1, 1, 1, 1);
       background-repeat: no-repeat;
       background-size: 100% 100%;
-      padding: 10% 4% 8% 6%;
-    }
 
-    @include mq(smHeight) {
-      padding: 7% 4% 6% 6%;
+      // for small height(less than 400px height)
+      padding: 7% 4% 6% 7%;
     }
 
     @include mq(xxl) {
       padding-left: 10%;
     }
+
+    @include mq(smHeight) {
+      padding: 10% 4% 8% 6%;
+    }
   }
 
+  &-image-container {
+    height: 100%;
+    width: 100%;
+    animation-name: moveRight;
+    animation-duration: 0.5s;
+    animation-timing-function: ease-in-out;
+    max-width: 250px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 24px;
+
+    > img {
+      border-radius: 6px;
+    }
+
+    // media queries
+    @include mq(xl) {
+      margin-right: 24px;
+    }
+
+    @include mq(lgHeight) {
+      justify-content: center;
+    }
+  }
+
+  // wrapper for enable scrolling
   &-scroll-wrapper {
     height: 100%;
     overflow: scroll;
     display: flex;
     flex-direction: column;
 
+    // media queries
     @include mq(xl) {
       flex-direction: row;
       align-items: center;
+
+      // hide scroll bar bigger than xl
+      scrollbar-width: none; /* Firefox */
+      &::-webkit-scrollbar {
+        display: none;
+      }
     }
   }
 
+  // `right-arrow` to go back list(dispaly below 780px)
   &-arrow {
     width: fit-content;
     display: flex;
@@ -77,14 +96,15 @@
     margin-bottom: 16px;
     opacity: 0.6;
 
-    > img {
-      width: 32px;
-    }
-
     &:hover {
       opacity: 1;
     }
 
+    > img {
+      width: 32px;
+    }
+
+    // media queries
     @include mq(md) {
       display: none;
     }
@@ -93,14 +113,20 @@
   &-detail-container {
     display: flex;
     flex-direction: column;
+    height: 100%;
     gap: 16px;
 
     > ul {
       gap: 16px;
     }
 
+    // media queries
     @include mq(xl) {
       width: 40%;
+    }
+
+    @include mq(lgHeight) {
+      justify-content: center;
     }
   }
 
@@ -117,9 +143,11 @@
       background-color: cornflowerblue;
       color: white;
       border: 1px solid cornflowerblue;
+
       &:hover {
         opacity: 0.8;
       }
+
       &:active {
         background-color: white;
         color: lightslategrey;
@@ -129,5 +157,9 @@
         background: lightcoral;
       }
     }
+  }
+
+  &-genre-wrapper {
+    flex-wrap: wrap;
   }
 }

@@ -12,17 +12,6 @@
     border-radius: 4px;
     gap: 8px;
 
-    animation-name: moveRight;
-    animation-duration: 0.5s;
-    animation-timing-function: ease-in;
-
-    > p {
-      display: -webkit-box;
-      -webkit-line-clamp: 3;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
-
     &:hover {
       background-color: lightgray;
       > img {
@@ -32,10 +21,22 @@
       box-shadow: 5px 5px 5px;
     }
 
+    > p {
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
     > img:not(.moviesListItem-no-image) {
       width: 100%;
       max-width: fit-content;
     }
+
+    // animation
+    animation-name: moveRight;
+    animation-duration: 0.5s;
+    animation-timing-function: ease-in;
   }
 
   &-no-image {

@@ -1,21 +1,16 @@
 @use "assets/variables" as *;
 
 .moviesContent {
+  // entire screen
   &-container {
     display: flex;
     height: 100vh;
-
     @include mq(md) {
       grid-template-columns: 40% 60%;
     }
-
-    .no-result {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
   }
 
+  // no result(both search and favorite)
   &-no-result {
     display: flex;
     flex-direction: column;
@@ -28,15 +23,19 @@
     }
   }
 
+  // list tab
   &-tabs {
     display: flex;
     gap: 16px;
+    margin-right: 8px;
+
     > h4 {
       border: 1px solid lightgray;
       padding: 4px 8px;
       border-radius: 6px 6px 0px 0px;
       border-bottom: none;
       cursor: pointer;
+
       &:hover {
         opacity: 0.6;
       }
@@ -45,14 +44,10 @@
     .active {
       background-color: lightblue;
     }
-
-    .disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-    }
   }
 
-  &-left-panel {
+  // left panel container
+  &-left-panel-container {
     display: flex;
     flex-direction: column;
     position: relative;
@@ -61,6 +56,12 @@
     overflow: scroll;
     flex: 1;
 
+    @include mq(md) {
+      flex: 1;
+      max-width: 510px;
+    }
+
+    // not display below 768px
     &.movie-selected {
       flex: 0;
       @include mq(md) {
@@ -68,22 +69,19 @@
       }
     }
 
-    @include mq(md) {
-      flex: 1;
-      max-width: 510px;
-    }
-
+    // search bar
     > input {
       line-height: 16px;
       font-size: 16px;
       padding: 8px 16px;
       border-radius: 6px;
-      border: 1px solid gray;
+      border: 2px solid gray;
       margin-bottom: 16px;
       margin-right: 8px;
     }
   }
 
+  // list wrapper
   &-list-wrapper {
     border: 1px solid lightgray;
     flex: 1;
@@ -92,8 +90,15 @@
     overflow: scroll;
     scroll-behavior: smooth;
     margin-right: 8px;
+
+    &.no-result {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
   }
 
+  // anchor
   &-anchor-to-top {
     display: flex;
     align-items: center;
@@ -104,7 +109,7 @@
     bottom: 24px;
     width: 60px;
     height: 60px;
-    border: 1px solid lightgray;
+    border: 2px solid lightgray;
     border-radius: 50px;
     background-color: white;
 
