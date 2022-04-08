@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import useGetMovieById from "queries/useGetMovieById";
-import getMovieImage from "utils/getMovieImage";
+import getMovieImagePath from "utils/getMovieImagePath";
 import ClipLoader from "react-spinners/ClipLoader";
 import { toast } from "react-toastify";
 import useSavedMovies from "hooks/useSavedMovies";
@@ -78,7 +78,7 @@ const MoviePanel = ({ selectedMovie, onSetSelectedMovie }) => {
   };
 
   const poster = displayMovie?.poster_path
-    ? getMovieImage(displayMovie?.poster_path, 400)
+    ? getMovieImagePath(displayMovie?.poster_path, 400)
     : noImageAvailable;
 
   return (
@@ -115,7 +115,7 @@ const MoviePanel = ({ selectedMovie, onSetSelectedMovie }) => {
               </div>
               <div className="flex-row">
                 <h4>Genre</h4>
-                <ul className="flex-row">
+                <ul className="flex-row moviePanel-genre-wrapper">
                   {displayMovie?.genres.map((genre) => {
                     return (
                       <li key={genre.id} className="label">

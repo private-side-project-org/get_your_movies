@@ -13,7 +13,7 @@
   "lint-staged": {
     "*.{js,jsx}": [
       "npx eslint . --fix",
-      "npx jest --testPathIgnorePatterns=/node_modules/"
+      "npx jest"
     ]
   },
   "repository": {

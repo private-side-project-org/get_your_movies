@@ -1,15 +1,15 @@
-import getMovieImage from "../getMovieImage";
+import getMovieImagePath from "../getMovieImagePath";
 
-describe("getMovieImage unit test", () => {
+describe("getMovieImagePath unit test", () => {
   it("should get error when pass wrong type of width", () => {
     const wrongTypeWidth = "300";
     const imagePath = "12345abcde";
 
     const errorMessage = new Error(
-      "Type error: type of given params in getMovieImage is wrong"
+      "Type error: type of given params in getMovieImagePath is wrong"
     );
 
-    expect(() => getMovieImage(imagePath, wrongTypeWidth)).toThrow(
+    expect(() => getMovieImagePath(imagePath, wrongTypeWidth)).toThrow(
       errorMessage
     );
   });
@@ -19,10 +19,10 @@ describe("getMovieImage unit test", () => {
     const wrongTypeImagePath = 12345;
 
     const errorMessage = new Error(
-      "Type error: type of given params in getMovieImage is wrong"
+      "Type error: type of given params in getMovieImagePath is wrong"
     );
 
-    expect(() => getMovieImage(wrongTypeImagePath, width)).toThrow(
+    expect(() => getMovieImagePath(wrongTypeImagePath, width)).toThrow(
       errorMessage
     );
   });
@@ -33,6 +33,6 @@ describe("getMovieImage unit test", () => {
     const imageBaseUrl = "https://image.tmdb.org/t/p/";
     const fullImagePath = `${imageBaseUrl}w${width}${imagePath}`;
 
-    expect(getMovieImage(imagePath, width)).toEqual(fullImagePath);
+    expect(getMovieImagePath(imagePath, width)).toEqual(fullImagePath);
   });
 });

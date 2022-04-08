@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import getMoviePath from "utils/getMovieImage";
+import getMovieImagePath from "utils/getMovieImagePath";
 import useSavedMovies from "hooks/useSavedMovies";
 
 import "./movieListItem.scss";
@@ -37,7 +37,7 @@ const MovieListItem = ({ movie, onSetSelectedMovie, isFirstMovie }) => {
     >
       <h3>{original_title}</h3>
       {backdrop_path ? (
-        <img src={getMoviePath(backdrop_path, 300)} alt="movie_label" />
+        <img src={getMovieImagePath(backdrop_path, 300)} alt="movie_label" />
       ) : (
         <img
           src={noImageAvailable}

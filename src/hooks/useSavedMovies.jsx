@@ -10,7 +10,7 @@ const SavedMovieContext = createContext({});
 // function that return values to be set on context
 const savedMovieContextValues = () => {
   const [favoriteMovieList, setFavoriteMovieList] = useState(
-    JSON.parse(localStorage.getItem(MOVIES))
+    JSON.parse(localStorage.getItem(MOVIES)) || []
   );
   const getFavoriteMovie = (movie) =>
     favoriteMovieList.find((favMovie) => favMovie.id === movie.id);
@@ -23,7 +23,7 @@ const savedMovieContextValues = () => {
 };
 
 // provider
-export const SavedMoviesProvider = ({ children }) => {
+export const SavedMovieProvider = ({ children }) => {
   return (
     <SavedMovieContext.Provider value={savedMovieContextValues()}>
       {children}
@@ -31,7 +31,7 @@ export const SavedMoviesProvider = ({ children }) => {
   );
 };
 
-SavedMoviesProvider.propTypes = {
+SavedMovieProvider.propTypes = {
   children: PropTypes.node.isRequired,
 };
 

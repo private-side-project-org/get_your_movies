@@ -86,12 +86,14 @@ const MovieContent = () => {
   return (
     <div className="moviesContent-container">
       <div
-        className={`moviesContent-left-panel ${
+        className={`moviesContent-left-panel-container ${
           selectedMovie ? "movie-selected" : ""
         }`}
       >
         <h2>Movie Search</h2>
-        <input onChange={handleSearch} placeholder="type keyword here..." />
+        {selectedTab === SEARCH && (
+          <input onChange={handleSearch} placeholder="type keyword here..." />
+        )}
         <div className="moviesContent-tabs">
           <h4
             className={selectedTab === SEARCH ? "active" : ""}

@@ -1,5 +1,5 @@
 /**
- * getMovieImage takes imgPath and width and return full image path to be set as src of img tag.
+ * getMovieImagePath takes imgPath and width and return full image path to be set as src of img tag.
  *
  * @param { string } imgPath
  * @param { number } width
@@ -14,7 +14,7 @@ export default (imgPath, width) => {
     (typeof imgPath !== "string" || typeof width !== "number")
   ) {
     throw new Error(
-      "Type error: type of given params in getMovieImage is wrong"
+      "Type error: type of given params in getMovieImagePath is wrong"
     );
   }
 
