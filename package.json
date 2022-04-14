@@ -29,7 +29,7 @@
   "dependencies": {
     "core-js": "3.21.1",
     "lodash": "4.17.21",
-    "prop-types": "^15.8.1",
+    "prop-types": "15.8.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-query": "3.34.19",
@@ -41,6 +41,8 @@
     "@babel/core": "7.17.8",
     "@babel/preset-env": "7.16.11",
     "@babel/preset-react": "7.16.7",
+    "@testing-library/react": "12.1.2",
+    "@testing-library/user-event": "14.1.0",
     "babel-loader": "8.2.4",
     "css-loader": "6.7.1",
     "dotenv": "16.0.0",

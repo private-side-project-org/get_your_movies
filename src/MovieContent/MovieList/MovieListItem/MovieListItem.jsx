@@ -34,6 +34,7 @@ const MovieListItem = ({ movie, onSetSelectedMovie, isFirstMovie }) => {
       }}
       // set id #top to get user to go top when click `top` button
       id={isFirstMovie ? "top" : ""}
+      data-testid="set-movie-button"
     >
       <h3>{original_title}</h3>
       {backdrop_path ? (
