@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`MovieList test get props and render child 1`] = `
+exports[`MovieList test get props and generate snapshot 1`] = `
 <body>
   <div>
     <div

@@ -20,6 +20,7 @@ const mockedMovie = {
   ],
 };
 
+// mock react-query hook
 jest.mock("../../../queries/useGetMovieById", () =>
   jest.fn(() => ({ movie: mockedMovie, isLoading: false, isFetching: false }))
 );
@@ -38,7 +39,7 @@ WrapperComponent.propTypes = {
 };
 
 describe("MoviePanel component test", () => {
-  it("renders and snapshot component", () => {
+  it("renders and generate snapshot", () => {
     const props = {
       selectedMovie: {},
       onSetSelectedMovie: jest.fn(),

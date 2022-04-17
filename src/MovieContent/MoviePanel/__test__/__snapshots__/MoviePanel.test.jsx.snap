@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`MoviePanel component test renders and snapshot component 1`] = `
+exports[`MoviePanel component test renders and generate snapshot 1`] = `
 <body>
   <div>
     <div

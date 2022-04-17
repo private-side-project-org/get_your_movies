@@ -23,13 +23,16 @@ const movies = [
   },
 ];
 
+// mocked variables
 let hasNextPage = true;
-const fetchNextPage = jest.fn();
-const onSetSelectedMovie = jest.fn();
+let entries = [{ isIntersecting: true }];
 const selectedTab = "search";
 
-let entries = [{ isIntersecting: true }];
+// mocked functions
+const fetchNextPage = jest.fn();
+const onSetSelectedMovie = jest.fn();
 
+// prep mock intersectionObserver
 const observe = jest.fn(() => {
   entries.forEach((entry) => {
     const intersecting = entry.isIntersecting;
@@ -39,6 +42,7 @@ const observe = jest.fn(() => {
   });
 });
 
+// mock intersectionObserver
 window.IntersectionObserver = jest.fn(() => ({
   observe,
 }));
@@ -58,7 +62,7 @@ beforeEach(() => {
 });
 
 describe("MovieList test", () => {
-  it("get props and render child", () => {
+  it("get props and generate snapshot", () => {
     expect(renderedMovieList.baseElement).toMatchSnapshot();
     hasNextPage = false;
   });

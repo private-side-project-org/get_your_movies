@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`MovieListItem test gets props and render snapshot 1`] = `
+exports[`MovieListItem component test gets props and generate snapshot 1`] = `
 <body>
   <div>
     <div

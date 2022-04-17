@@ -24,12 +24,12 @@ beforeEach(() => {
   );
 });
 
-describe("MovieListItem test", () => {
-  it("gets props and render snapshot", () => {
+describe("MovieListItem component test", () => {
+  it("gets props and generate snapshot", () => {
     expect(renderedMovieListItem.baseElement).toMatchSnapshot();
   });
 
-  it("get correct title, overview and backdrop_path", () => {
+  it("get correct title, overview", () => {
     const { getByText } = renderedMovieListItem;
 
     getByText("test title");
@@ -45,7 +45,7 @@ describe("MovieListItem test", () => {
     );
   });
 
-  it("fire click event properly", () => {
+  it("fire click event", () => {
     const targetElem = screen.getByTestId("set-movie-button");
 
     fireEvent(
