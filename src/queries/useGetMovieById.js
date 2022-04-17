@@ -15,10 +15,8 @@ export default (id, { enabled }) => {
     data: movie,
     isLoading,
     isFetching,
+    isSuccess,
   } = useQuery(["movies", id], fetchMovieById, {
-    onError: (err) => {
-      console.log("error", err);
-    },
     enabled,
   });
 
@@ -26,5 +24,6 @@ export default (id, { enabled }) => {
     movie,
     isLoading,
     isFetching,
+    isSuccess,
   };
 };
