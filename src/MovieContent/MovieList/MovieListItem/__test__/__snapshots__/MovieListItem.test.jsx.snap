@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MovieListItem test gets props and render snapshot 1`] = `
+<body>
+  <div>
+    <div
+      class="moviesListItem-container"
+      data-testid="set-movie-button"
+      id=""
+    >
+      <h3>
+        test title
+      </h3>
+      <img
+        alt="movie_label"
+        src="https://image.tmdb.org/t/p/w300abcde12345"
+      />
+      <p>
+        this is test overview
+      </p>
+    </div>
+  </div>
+</body>
+`;

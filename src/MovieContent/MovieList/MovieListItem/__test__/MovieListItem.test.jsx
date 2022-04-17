@@ -10,30 +10,34 @@ const movie = {
   backdrop_path: "abcde12345",
 };
 
+let renderedMovieListItem;
+
+beforeEach(() => {
+  renderedMovieListItem = render(
+    <MovieListItem
+      movie={movie}
+      onSetSelectedMovie={onSetSelectedMovie}
+      selectedTab="search"
+      isFirstMovie={false}
+    />,
+    { wrapper: SavedMovieProvider }
+  );
+});
+
 describe("MovieListItem test", () => {
+  it("gets props and render snapshot", () => {
+    expect(renderedMovieListItem.baseElement).toMatchSnapshot();
+  });
+
   it("get correct title, overview and backdrop_path", () => {
-    const { getByText } = render(
-      <MovieListItem
-        movie={movie}
-        onSetSelectedMovie={onSetSelectedMovie}
-        selectedTab="search"
-        isFirstMovie={false}
-      />
-    );
+    const { getByText } = renderedMovieListItem;
 
     getByText("test title");
     getByText("this is test overview");
   });
 
-  it("render correctly, get proper image src", async () => {
-    const { findByAltText } = render(
-      <MovieListItem
-        movie={movie}
-        onSetSelectedMovie={onSetSelectedMovie}
-        selectedTab="search"
-        isFirstMovie={false}
-      />
-    );
+  it("renders, get proper image src", async () => {
+    const { findByAltText } = renderedMovieListItem;
     const targetImg = await findByAltText("movie_label");
 
     expect(targetImg.src).toContain(
@@ -42,16 +46,6 @@ describe("MovieListItem test", () => {
   });
 
   it("fire click event properly", () => {
-    render(
-      <MovieListItem
-        movie={movie}
-        onSetSelectedMovie={onSetSelectedMovie}
-        selectedTab="search"
-        isFirstMovie
-      />,
-      { wrapper: SavedMovieProvider }
-    );
-
     const targetElem = screen.getByTestId("set-movie-button");
 
     fireEvent(
