@@ -13,7 +13,7 @@
   "lint-staged": {
     "*.{js,jsx}": [
       "npx eslint . --fix",
-      "npx jest"
+      "npx jest --coverage"
     ]
   },
   "repository": {

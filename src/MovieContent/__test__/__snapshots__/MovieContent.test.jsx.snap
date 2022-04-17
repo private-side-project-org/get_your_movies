@@ -1,0 +1,67 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MovieContent test snapshots movieContent 1`] = `
+<body>
+  <div>
+    <div
+      class="moviesContent-container"
+    >
+      <div
+        class="moviesContent-left-panel-container "
+      >
+        <h2>
+          Movie Search
+        </h2>
+        <input
+          data-testid="search_input"
+          placeholder="type keyword here..."
+        />
+        <div
+          class="moviesContent-tabs"
+        >
+          <h4
+            class="active"
+            data-testid="search_tab"
+          >
+            Search result
+          </h4>
+          <h4
+            class=""
+            data-testid="favorite_tab"
+          >
+            Your favorites
+          </h4>
+        </div>
+        <div
+          class="moviesContent-list-wrapper no-result"
+        >
+          <div
+            class="moviesContent-no-result"
+          >
+            <img
+              alt="clapper_board"
+              src="[object Object]"
+            />
+            <h2>
+              No result found
+            </h2>
+            <p>
+              Or, you didn't try search? 
+              <br />
+               Get your movie from search bar.
+            </p>
+          </div>
+        </div>
+        <a
+          class="moviesContent-anchor-to-top"
+          href="#top"
+        >
+          <span>
+            Top
+          </span>
+        </a>
+      </div>
+    </div>
+  </div>
+</body>
+`;

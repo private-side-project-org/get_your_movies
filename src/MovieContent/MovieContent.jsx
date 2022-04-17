@@ -92,18 +92,24 @@ const MovieContent = () => {
       >
         <h2>Movie Search</h2>
         {selectedTab === SEARCH && (
-          <input onChange={handleSearch} placeholder="type keyword here..." />
+          <input
+            data-testid="search_input"
+            onChange={handleSearch}
+            placeholder="type keyword here..."
+          />
         )}
         <div className="moviesContent-tabs">
           <h4
             className={selectedTab === SEARCH ? "active" : ""}
             onClick={() => handleClickTab(SEARCH)}
+            data-testid="search_tab"
           >
             Search result
           </h4>
           <h4
             className={`${selectedTab === FAVORITE ? "active" : ""}`}
             onClick={() => handleClickTab(FAVORITE)}
+            data-testid="favorite_tab"
           >
             Your favorites
           </h4>
