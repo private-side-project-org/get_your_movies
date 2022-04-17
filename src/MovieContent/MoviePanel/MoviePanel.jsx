@@ -92,6 +92,7 @@ const MoviePanel = ({ selectedMovie, onSetSelectedMovie }) => {
               <div
                 className="moviePanel-arrow"
                 onClick={() => onSetSelectedMovie(null)}
+                data-testid="back_to_list_arrow"
               >
                 <img src={arrow} alt="back_to_list_arrow" />
                 <p>Back to the list</p>
@@ -104,6 +105,7 @@ const MoviePanel = ({ selectedMovie, onSetSelectedMovie }) => {
                 {
                   <button
                     type="button"
+                    data-testid="action_button"
                     onClick={
                       favoriteMovie ? handleRemoveMovie : handleSaveMovie
                     }

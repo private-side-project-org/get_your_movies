@@ -1,0 +1,114 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MoviePanel component test renders and snapshot component 1`] = `
+<body>
+  <div>
+    <div
+      class="moviePanel-container"
+    >
+      <div
+        class="moviePanel-scroll-wrapper"
+      >
+        <div
+          class="moviePanel-image-container"
+        >
+          <div
+            class="moviePanel-arrow"
+            data-testid="back_to_list_arrow"
+          >
+            <img
+              alt="back_to_list_arrow"
+              src="[object Object]"
+            />
+            <p>
+              Back to the list
+            </p>
+          </div>
+          <img
+            alt="poster"
+            src="[object Object]"
+          />
+        </div>
+        <div
+          class="moviePanel-detail-container"
+        >
+          <div
+            class="moviePanel-title-wrapper"
+          >
+            <h2>
+              test title
+            </h2>
+            <button
+              class=""
+              data-testid="action_button"
+              type="button"
+            >
+              Save movie
+            </button>
+          </div>
+          <div
+            class="flex-row"
+          >
+            <h4>
+              Genre
+            </h4>
+            <ul
+              class="flex-row moviePanel-genre-wrapper"
+            >
+              <li
+                class="label"
+              >
+                genre1
+              </li>
+              <li
+                class="label"
+              >
+                genre2
+              </li>
+            </ul>
+          </div>
+          <div
+            class="flex-row"
+          >
+            <h4>
+              Language
+            </h4>
+            <ul
+              class="flex-row"
+            >
+              <li
+                class="label"
+              >
+                en
+              </li>
+            </ul>
+          </div>
+          <p>
+            test overview
+          </p>
+          <div
+            class="flex-row"
+          >
+            <h4>
+              Productions:
+            </h4>
+            <ul
+              class="flex-column"
+            >
+              <li>
+                test company1
+              </li>
+              <li>
+                test company2
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="Toastify"
+    />
+  </div>
+</body>
+`;

@@ -4,7 +4,7 @@
   "description": "movie getter with connecting api",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --bail --coverage",
     "start": "webpack serve --mode development",
     "prepare": "husky install",
     "lint-staged": "lint-staged",
@@ -13,7 +13,7 @@
   "lint-staged": {
     "*.{js,jsx}": [
       "npx eslint . --fix",
-      "npx jest --coverage"
+      "npm run test"
     ]
   },
   "repository": {
