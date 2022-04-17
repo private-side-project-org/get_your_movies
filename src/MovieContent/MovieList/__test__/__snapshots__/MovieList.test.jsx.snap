@@ -1,0 +1,78 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MovieList test get props and render child 1`] = `
+<body>
+  <div>
+    <div
+      class="moviesList-container"
+    >
+      <div
+        class="moviesListItem-container"
+        data-testid="set-movie-button"
+        id="top"
+      >
+        <h3>
+          test title1
+        </h3>
+        <img
+          alt="movie_label"
+          src="https://image.tmdb.org/t/p/w300abcde12345"
+        />
+        <p>
+          this is test overview1
+        </p>
+      </div>
+      <div
+        class="moviesListItem-container"
+        data-testid="set-movie-button"
+        id=""
+      >
+        <h3>
+          test title2
+        </h3>
+        <img
+          alt="movie_label"
+          src="https://image.tmdb.org/t/p/w300abcde12345"
+        />
+        <p>
+          this is test overview2
+        </p>
+      </div>
+      <div
+        class="moviesListItem-container"
+        data-testid="set-movie-button"
+        id=""
+      >
+        <h3>
+          test title3
+        </h3>
+        <img
+          alt="movie_label"
+          src="https://image.tmdb.org/t/p/w300abcde12345"
+        />
+        <p>
+          this is test overview3
+        </p>
+      </div>
+      <div
+        data-test-id="loader"
+        id="loader"
+      >
+        <span
+          class="css-1xdhyk6"
+        >
+          <span
+            class="css-1j1i60w"
+          />
+          <span
+            class="css-wbrves"
+          />
+          <span
+            class="css-1ctme5z"
+          />
+        </span>
+      </div>
+    </div>
+  </div>
+</body>
+`;

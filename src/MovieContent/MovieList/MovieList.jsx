@@ -66,7 +66,7 @@ const MovieList = ({
         );
       })}
       {hasNextPage && selectedTab !== "favorite" && (
-        <div id="loader">
+        <div id="loader" data-test-id="loader">
           <SyncLoader color="#000000" size={15} />
         </div>
       )}
